@@ -1,0 +1,36 @@
+{
+  "name": "features-infra",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "packages/shared/features-infra/src",
+  "prefix": "mv",
+  "projectType": "library",
+  "tags": ["type:util"],
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "packages/shared/features-infra/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "packages/shared/features-infra/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "packages/shared/features-infra/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "packages/shared/features-infra/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

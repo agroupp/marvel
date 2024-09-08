@@ -1,0 +1,62 @@
+{
+  "root": true,
+  "ignorePatterns": ["**/*"],
+  "plugins": ["@nx", "@typescript-eslint", "prettier"],
+  "extends": [
+    "plugin:@nx/angular",
+    "plugin:@angular-eslint/template/process-inline-templates",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
+      "rules": {
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ],
+        "prettier/prettier": [
+          "error",
+          {
+            "singleQuote": true,
+            "trailingComma": "all",
+            "arrowParens": "avoid",
+            "printWidth": 120,
+            "tabWidth": 2,
+            "eslintIntegration": true,
+            "bracketSpacing": true,
+            "arrow-body-style": "off",
+            "prefer-arrow-callback": "off"
+          }
+        ]
+      }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.spec.ts", "*.spec.tsx", "*.spec.js", "*.spec.jsx"],
+      "env": {
+        "jest": true
+      },
+      "rules": {}
+    }
+  ]
+}
